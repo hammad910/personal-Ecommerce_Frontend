@@ -3,25 +3,41 @@ import RelatedProducts from "@/components/RelatedProducts";
 import Wrapper from "@/components/Wrapper";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { fetchDataFromApi } from "@/utils/api";
-// import { getDiscountedPricePercentage } from "@/utils/helper";
-// import { useSelector, useDispatch } from "react-redux";
-// import { addToCart } from "@/store/cartSlice";
+import { getDiscountedPrice } from "@/utils/helper";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "@/store/cartSlice";
 
-// import { ToastContainer, toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductDetails = ({ product, products }) => {
-
+    const [selectedSize, setSelectedSize] = useState()
+    const [showError, setShowError] = useState(false)
+    const dispatch = useDispatch()
     const p = product?.data?.[0].attributes;
+
+    const notify = () => {
+        toast.success("Item added to your cart.", {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+    }
 
     return (
         <div className="w-full md:py-20">
-            {/* <ToastContainer /> */}
+            <ToastContainer />
             <Wrapper>
                 <div className="flex flex-col lg:flex-row md:px-10 gap-[50px] lg:gap-[100px]">
                     {/* left column start */}
                     <div className="w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0">
-                        <ProductDetailsCarousel images={p.img.data}/>
+                        <ProductDetailsCarousel images={p.img.data} />
                     </div>
                     {/* left column end */}
 
@@ -29,28 +45,35 @@ const ProductDetails = ({ product, products }) => {
                     <div className="flex-[1] py-3">
                         {/* PRODUCT TITLE */}
                         <div className="text-[34px] font-semibold mb-2 leading-tight">
-                            Product Name
+                            {p.name}
                         </div>
 
                         {/* PRODUCT SUBTITLE */}
                         <div className="text-lg font-semibold mb-5">
-                            Product Subtitle
+                            {p.subtitle}
                         </div>
 
                         {/* PRODUCT PRICE */}
                         <div className="flex items-center">
                             <p className="mr-2 text-lg font-semibold">
-                                &#8360;3999
+                                &#8377;{p.price}
                             </p>
-                            <>
-                                <p className="text-base  font-medium line-through">
-                                    &#8360;5999
-                                </p>
-                                <p className="ml-auto text-base font-medium text-green-500">
-                                    70%off
-                                </p>
-                            </>
+                            {p.original_price && (
+                                <>
+                                    <p className="text-base  font-medium line-through">
+                                        &#8377;{p.original_price}
+                                    </p>
+                                    <p className="ml-auto text-base font-medium text-green-500">
+                                        {getDiscountedPrice(
+                                            p.original_price,
+                                            p.price
+                                        )}
+                                        % off
+                                    </p>
+                                </>
+                            )}
                         </div>
+
 
                         <div className="text-md font-medium text-black/[0.5]">
                             incl. of taxes
@@ -77,55 +100,33 @@ const ProductDetails = ({ product, products }) => {
                                 id="sizesGrid"
                                 className="grid grid-cols-3 gap-2"
                             >
-                                <div
-                                    className={`border rounded-md text-center py-3 font-medium`}
-                                >
-                                    20
-                                </div>
-                                <div
-                                    className={`border rounded-md text-center py-3 font-medium`}
-                                >
-                                    30
-                                </div>
-                                <div
-                                    className={`border rounded-md text-center py-3 font-medium`}
-                                >
-                                    40
-                                </div>
-                                <div
-                                    className={`border rounded-md text-center py-3 font-medium`}
-                                >
-                                    50
-                                </div>
-                                <div
-                                    className={`border rounded-md text-center py-3 font-medium`}
-                                >
-                                    60
-                                </div>
-                                <div
-                                    className={`border rounded-md text-center py-3 opacity-50 bg-black/[0.1] cursor-not-allowed font-medium`}
-                                >
-                                    70
-                                </div>
-                                <div
-                                    className={`border rounded-md text-center py-3 opacity-50 bg-black/[0.1] cursor-not-allowed font-medium`}
-                                >
-                                    80
-                                </div>
-                                <div
-                                    className={`border rounded-md text-center py-3 opacity-50 bg-black/[0.1] cursor-not-allowed font-medium`}
-                                >
-                                    90
-                                </div>
+                                {p.size.data.map((item, index) => (
+                                    <div
+                                        key={index}
+                                        id="size"
+                                        className={`border rounded-md text-center py-3 font-medium 
+                                            ${item.enabled ? "hover:border-black cursor-pointer"
+                                                : "cursor-not-allowed bg-black/[0.1] opacity-50"}
+                                            ${selectedSize === item.size && item.enabled ? "border-black"
+                                                : ""} `}
+                                        onClick={() => {
+                                            setSelectedSize(item.size)
+                                            setShowError(false)
+                                        }}
+                                    >
+                                        {item.size}
+                                    </div>
+                                ))}
                             </div>
                             {/* SIZE END */}
 
                             {/* SHOW ERROR START */}
                             {/* {showError && ( */}
-                            <div className="text-red-600 mt-1">
-                                Size selection is required
-                            </div>
-                            {/* )} */}
+                            {showError && (
+                                <div className="text-red-600 mt-1">
+                                    Size selection is required
+                                </div>
+                            )}
                             {/* SHOW ERROR END */}
                         </div>
                         {/* PRODUCT SIZE RANGE END */}
@@ -134,7 +135,23 @@ const ProductDetails = ({ product, products }) => {
                         <button
                             className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75"
                             onClick={() => {
+                                if (!selectedSize) {
+                                    setShowError(true);
+                                    document.getElementById('size').scrollIntoView({
+                                        block: "center",
+                                        behavior: "smooth"
+                                    })
+                                } else {
+                                    dispatch(
+                                        addToCart({
+                                            ...product?.data?.[0],
+                                            selectedSize,
+                                            oneQuantityPrice: p.price
+                                        }))
+                                    notify()
+                                }
                             }}
+
                         >
                             Add to Cart
                         </button>
@@ -152,10 +169,7 @@ const ProductDetails = ({ product, products }) => {
                                 Product Details
                             </div>
                             <div className="markdown text-md mb-5">
-                                is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                            </div>
-                            <div className="markdown text-md mb-5">
-                                is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                                {p.description}
                             </div>
                         </div>
                     </div>
@@ -190,8 +204,8 @@ export async function getStaticProps({ params: { slug } }) {
     const products = await fetchDataFromApi(`/api/products?populate=*&[filters][slug][$ne]=${slug}`)
     return {
         props: {
-           product,
-           products,
+            product,
+            products,
         }
     }
 
