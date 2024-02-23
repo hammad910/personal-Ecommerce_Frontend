@@ -147,7 +147,8 @@ const ProductDetails = ({ product, products }) => {
                                             ...product?.data?.[0],
                                             selectedSize,
                                             oneQuantityPrice: p.price
-                                        }))
+                                        })
+                                        );
                                     notify()
                                 }
                             }}
