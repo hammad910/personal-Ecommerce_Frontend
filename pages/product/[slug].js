@@ -56,12 +56,12 @@ const ProductDetails = ({ product, products }) => {
                         {/* PRODUCT PRICE */}
                         <div className="flex items-center">
                             <p className="mr-2 text-lg font-semibold">
-                                &#8377;{p.price}
+                                &#8360;{p.price}
                             </p>
                             {p.original_price && (
                                 <>
                                     <p className="text-base  font-medium line-through">
-                                        &#8377;{p.original_price}
+                                        &#8360;{p.original_price}
                                     </p>
                                     <p className="ml-auto text-base font-medium text-green-500">
                                         {getDiscountedPrice(
@@ -83,20 +83,20 @@ const ProductDetails = ({ product, products }) => {
                         </div>
 
                         {/* PRODUCT SIZE RANGE START */}
-                        <div className="mb-10">
+                        {/* <div className="mb-10">
                             {/* HEADING START */}
-                            <div className="flex justify-between mb-2">
+                            {/* <div className="flex justify-between mb-2">
                                 <div className="text-md font-semibold">
                                     Select Size
                                 </div>
                                 <div className="text-md font-medium text-black/[0.5] cursor-pointer">
                                     Select Guide
                                 </div>
-                            </div>
+                            </div> */}
                             {/* HEADING END */}
 
                             {/* SIZE START */}
-                            <div
+                            {/* <div
                                 id="sizesGrid"
                                 className="grid grid-cols-3 gap-2"
                             >
@@ -117,31 +117,32 @@ const ProductDetails = ({ product, products }) => {
                                         {item.size}
                                     </div>
                                 ))}
-                            </div>
+                            </div> */}
                             {/* SIZE END */}
 
                             {/* SHOW ERROR START */}
                             {/* {showError && ( */}
-                            {showError && (
+                            {/* {showError && (
                                 <div className="text-red-600 mt-1">
                                     Size selection is required
                                 </div>
-                            )}
+                            )} */}
                             {/* SHOW ERROR END */}
-                        </div>
+                        {/* </div>  */}
                         {/* PRODUCT SIZE RANGE END */}
 
                         {/* ADD TO CART BUTTON START */}
                         <button
                             className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75"
                             onClick={() => {
-                                if (!selectedSize) {
-                                    setShowError(true);
-                                    document.getElementById('size').scrollIntoView({
-                                        block: "center",
-                                        behavior: "smooth"
-                                    })
-                                } else {
+                                // if (!selectedSize) {
+                                //     setShowError(true);
+                                //     document.getElementById('size').scrollIntoView({
+                                //         block: "center",
+                                //         behavior: "smooth"
+                                //     })
+                                // } else {
+
                                     dispatch(
                                         addToCart({
                                             ...product?.data?.[0],
@@ -150,7 +151,7 @@ const ProductDetails = ({ product, products }) => {
                                         })
                                         );
                                     notify()
-                                }
+                                // }
                             }}
 
                         >
@@ -176,7 +177,7 @@ const ProductDetails = ({ product, products }) => {
                     </div>
                     {/* right column end */}
                 </div>
-                {/* <RelatedProducts /> */}
+                <RelatedProducts products={products} />
             </Wrapper >
         </div >
     );

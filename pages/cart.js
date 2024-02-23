@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Wrapper from "@/components/Wrapper";
 import CartItem from "@/components/CartItem";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 // import { makePaymentRequest } from "@/utils/api";
 // import { loadStripe } from "@stripe/stripe-js";
@@ -12,36 +12,13 @@ import CartItem from "@/components/CartItem";
 // );
 
 export const Cart = () => {
-    // const [loading, setLoading] = useState(false);
-    // const { cartItems } = useSelector((state) => state.cart);
 
-    // const subTotal = useMemo(() => {
-    //     return cartItems.reduce(
-    //         (total, val) => total + val.attributes.price,
-    //         0
-    //     );
-    // }, [cartItems]);
-
-    // const handlePayment = async () => {
-    //     try {
-    //         setLoading(true);
-    //         const stripe = await stripePromise;
-    //         const res = await makePaymentRequest("/api/orders", {
-    //             products: cartItems,
-    //         });
-    //         await stripe.redirectToCheckout({
-    //             sessionId: res.stripeSession.id,
-    //         });
-    //     } catch (error) {
-    //         setLoading(false);
-    //         console.log(error);
-    //     }
-    // };
+    const { cartItems } = useSelector((state) => state.cart)
 
     return (
         <div className="w-full md:py-20">
             <Wrapper>
-                {/* {cartItems.length > 0 && ( */}
+                {cartItems.length > 0 && (
                     <>
                         {/* HEADING AND PARAGRAPH START */}
                         <div className="text-center max-w-[800px] mx-auto mt-8 md:mt-0">
@@ -58,11 +35,9 @@ export const Cart = () => {
                                 <div className="text-lg font-bold">
                                     Cart Items
                                 </div>
-                                {/* {cartItems.map((item) => ( */}
-                                    <CartItem  />
-                                    <CartItem  />
-                                    <CartItem  />
-                                {/* ))} */}
+                                {cartItems.map((item) => (
+                                    <CartItem key={item.id} data={item} />
+                                ))}
                             </div>
                             {/* CART ITEMS END */}
 
@@ -76,7 +51,7 @@ export const Cart = () => {
                                             Subtotal
                                         </div>
                                         <div className="text-md md:text-lg font-medium text-black">
-                                            &#8377;12999
+                                            &#8360;12999
                                         </div>
                                     </div>
                                     <div className="text-sm md:text-md py-5 border-t mt-5">
@@ -100,10 +75,12 @@ export const Cart = () => {
                         </div>
                         {/* CART CONTENT END */}
                     </>
-                {/* )} */}
+                )
+                }
 
                 {/* This is empty screen */}
-                    {/* <div className="flex-[2] flex flex-col items-center pb-[50px] md:-mt-14">
+                {cartItems.length < 1 && (
+                    <div className="flex-[2] flex flex-col items-center pb-[50px] md:-mt-14">
                         <Image
                             src="/empty-cart.jpg"
                             width={300}
@@ -124,7 +101,9 @@ export const Cart = () => {
                         >
                             Continue Shopping
                         </Link>
-                    </div> */}
+                    </div>
+                )
+                }
             </Wrapper>
         </div>
     );
