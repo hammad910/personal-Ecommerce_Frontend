@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Wrapper from "@/components/Wrapper";
-import CartItem from "@/components/CartItem";
+import CartItem from "@/components/cartItem";
 import { useSelector } from "react-redux";
 
 // import { makePaymentRequest } from "@/utils/api";

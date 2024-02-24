@@ -1,4 +1,4 @@
-import ProductDetailsCarousel from "@/components/ProductDetailsCarousel";
+import ProductDetailsCarousel from "@/components/ProductDetailscarousel";
 import RelatedProducts from "@/components/RelatedProducts";
 import Wrapper from "@/components/Wrapper";
 import { IoMdHeartEmpty } from "react-icons/io";
