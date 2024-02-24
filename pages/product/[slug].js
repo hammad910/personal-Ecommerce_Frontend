@@ -170,9 +170,9 @@ const ProductDetails = ({ product, products }) => {
                             <div className="text-lg font-bold mb-5">
                                 Product Details
                             </div>
-                            <div className="markdown text-md mb-5">
+                            {/* <div className="markdown text-md mb-5">
                                 {p.description}
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     {/* right column end */}
