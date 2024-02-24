@@ -43,13 +43,13 @@ export default function Home() {
     }, [lastScrollY])
 
 
-    useEffect(() => {
-        fetchCategories();
-    }, [])
-    const fetchCategories = async () => {
-        const { data } = await fetchDataFromApi('/api/categories?populate=*')
-        setCategories(data)
-    }
+    // useEffect(() => {
+    //     fetchCategories();
+    // }, [])
+    // const fetchCategories = async () => {
+    //     const { data } = await fetchDataFromApi('/api/categories?populate=*')
+    //     setCategories(data)
+    // }
 
     return (
         <header className={`w-full h-[50px] md:h-[80px] bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show}`}>
