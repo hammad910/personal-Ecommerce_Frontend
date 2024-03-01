@@ -1,8 +1,10 @@
 // import { getDiscountedPricePercentage } from "@/utils/helper";
 import { getDiscountedPrice } from "@/utils/helper";
+import img from '../images/assets/Air Jordan 1 Mid SE Craft/thumbnail.jpeg'
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+
 const ProductCard = ({data: {attributes: p, id}}) => {
     return (
         <Link
@@ -12,9 +14,9 @@ const ProductCard = ({data: {attributes: p, id}}) => {
             <Image
                 width={500}
                 height={500}
-                src={p.thumbnail.data.attributes.url}
+                src={p.thumnail.data.attributes.url}
                 alt=''
-            />
+            />  
             <div className="p-4 text-black/[0.9]">
                 <h2 className="text-lg font-medium">{p.name}</h2>
                 <div className="flex items-center text-black/[0.5]">

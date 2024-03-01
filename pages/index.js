@@ -1,9 +1,14 @@
 import HeroBanner from "@/components/HeroBanner";
 import ProductCard from "@/components/ProductCard";
 import Wrapper from "@/components/Wrapper";
+import { useSession } from "next-auth/react";
 import { fetchDataFromApi } from "@/utils/api";
 
 export default function home({ products }) {
+    // const session = useSession()
+    // if (session.data === null) {
+    //     return <button>login</button>
+    // }
     return (
         <main>
             <HeroBanner />
