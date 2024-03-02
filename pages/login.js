@@ -1,11 +1,19 @@
 import Link from "next/link";
 import React from "react";
 
+import { signIn } from "next-auth/react";
 const LoginComponent = () => {
+  const handleSignInWithGoogle = async () => {
+    await signIn("google");
+  };
   return (
     <div className="bg-white min-h-screen flex">
       {/* Sidebar */}
       <div className="hidden lg:flex flex-col justify-between bg-yellow-300 lg:p-8 xl:p-12 lg:max-w-sm xl:max-w-lg">
+      <div className="flex items-center justify-start space-x-3">
+          <span className="bg-black rounded-full w-8 h-8"></span>
+          <a href="#" className="font-medium text-xl">Nike</a>
+        </div>
         <div className="space-y-5">
           <h1 className="lg:text-3xl xl:text-5xl xl:leading-snug font-extrabold">
             Enter your account and discover new experiences
@@ -17,7 +25,7 @@ const LoginComponent = () => {
             </button>
           </Link>
         </div>
-        <p className="font-medium">© 2022 Company</p>
+        <p className="font-medium">© Happy Shopping</p>
       </div>
 
       {/* Login */}
@@ -43,13 +51,18 @@ const LoginComponent = () => {
               Sign in to account
             </h2>
             <p className="text-md md:text-xl">
-              Sign up or log in to place the order, no password required!
+              Sign up or log in to place the order...
             </p>
           </div>
           <div className="flex flex-col max-w-md space-y-5">
             <input
               type="text"
               placeholder="Username"
+              className="flex px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder-normal"
+            />
+            <input
+              type="text"
+              placeholder="Password"
               className="flex px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder-normal"
             />
             <button className="flex items-center justify-center flex-none px-3 py-2 md:px-4 md:py-3 border-2 rounded-lg font-medium border-black bg-black text-white">
@@ -60,7 +73,7 @@ const LoginComponent = () => {
               <span className="px-4">Or</span>
               <span className="w-full border border-black"></span>
             </div>
-            <button className="flex items-center justify-center flex-none px-3 py-2 md:px-4 md:py-3 border-2 rounded-lg font-medium border-black relative">
+            <button onClick={handleSignInWithGoogle} className="flex items-center justify-center flex-none px-3 py-2 md:px-4 md:py-3 border-2 rounded-lg font-medium border-black relative">
               <span className="absolute left-4">
                 <svg
                   width="24px"

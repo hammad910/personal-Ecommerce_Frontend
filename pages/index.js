@@ -3,12 +3,22 @@ import ProductCard from "@/components/ProductCard";
 import Wrapper from "@/components/Wrapper";
 import { useSession } from "next-auth/react";
 import { fetchDataFromApi } from "@/utils/api";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function home({ products }) {
-    // const session = useSession()
-    // if (session.data === null) {
-    //     return <button>login</button>
-    // }
+    const session = useSession()
+    const router = useRouter()
+    useEffect(() => {
+        console.log("Session:", session);
+        if (session.data !== null) {
+            router.push('/') 
+        }else{
+            router.push('/login')
+        }
+        
+    }, [session, router])
+    
     return (
         <main>
             <HeroBanner />
