@@ -17,6 +17,7 @@ const CartItem = ({ data }) => {
     }
     const dispatch = useDispatch()
     const p = data.attributes;
+    console.log(p);
 
     return (
         <>
@@ -24,7 +25,7 @@ const CartItem = ({ data }) => {
             {/* IMAGE START */}
             <div className="shrink-0 aspect-square w-[50px] md:w-[120px]">
                 <Image
-                    src={p.thumbnail.data.attributes.url}
+                    src={p.thumnail?.data?.attributes?.url}
                     alt=''
                     width={120}
                     height={120}

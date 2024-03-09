@@ -9,15 +9,15 @@ import { useEffect } from "react";
 export default function home({ products }) {
     const session = useSession()
     const router = useRouter()
-    useEffect(() => {
-        console.log("Session:", session);
-        if (session.data !== null) {
-            router.push('/') 
-        }else{
-            router.push('/login')
-        }
+    // useEffect(() => {
+    //     console.log("Session:", session);
+    //     if (session.data === null) {
+    //         router.push('/login') 
+    //     }else{
+    //         router.push('/')
+    //     }
         
-    }, [session, router])
+    // }, [session, router])
     
     return (
         <main>

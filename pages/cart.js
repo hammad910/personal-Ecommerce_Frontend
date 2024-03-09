@@ -5,15 +5,10 @@ import Wrapper from "@/components/Wrapper";
 import CartItem from "@/components/cartItem";
 import { useSelector } from "react-redux";
 
-// import { makePaymentRequest } from "@/utils/api";
-// import { loadStripe } from "@stripe/stripe-js";
-// const stripePromise = loadStripe(
-//     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-// );
-
 export const Cart = () => {
 
     const { cartItems } = useSelector((state) => state.cart)
+    console.log(cartItems);
 
     return (
         <div className="w-full md:py-20">

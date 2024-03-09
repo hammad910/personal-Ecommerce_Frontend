@@ -1,7 +1,7 @@
 import nextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from 'next-auth/providers/google';
-import EmailProvider from 'next-auth/providers/email';
+// import EmailProvider from 'next-auth/providers/email';
 
 export const authOptions = {
   providers: [
@@ -13,10 +13,10 @@ export const authOptions = {
         clientId: '940483829717-rop71lo84qkm0lr79jqvre34bkjvc2eg.apps.googleusercontent.com',
         clientSecret: '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',
       }),
-      EmailProvider({
-        clientId: ,
-        clientSecret:
-      })
+      // EmailProvider({
+      //   clientId: ,
+      //   clientSecret:
+      // })
   ],
 };
 export default nextAuth(authOptions)
