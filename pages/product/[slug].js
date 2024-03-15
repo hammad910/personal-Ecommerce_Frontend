@@ -9,6 +9,7 @@ import { addToCart } from "@/store/cartSlice";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { addToWishlist } from "@/store/wishlistSlice";
+import ProductDetailsCarousel from "@/components/ProductDetailscarousel";
 
 const ProductDetails = ({ product, products }) => {
     const dispatch = useDispatch()
@@ -34,7 +35,7 @@ const ProductDetails = ({ product, products }) => {
                 <div className="flex flex-col lg:flex-row md:px-10 gap-[50px] lg:gap-[100px]">
                     {/* left column start */}
                     <div className="w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0">
-                        {/* <ProductDetailsCarousel images={p.img.data} /> */}
+                        <ProductDetailsCarousel images={p.images.data} />
                     </div>
                     {/* left column end */}
 

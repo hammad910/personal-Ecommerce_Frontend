@@ -1,10 +1,8 @@
 import Image from "next/image";
 import checkImg from '@/images/assets/Air Jordan 1 Mid SE Craft/thumbnail.jpeg'
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { removeFromCart } from "@/store/cartSlice";
 import { useDispatch } from "react-redux";
-import Cart from "@/pages/cart";
 import { Button } from "@/components/ui/button"
 import { BsCart } from "react-icons/bs";
 import { ToastContainer, toast } from 'react-toastify';
@@ -37,8 +35,8 @@ const WishlistItem = ({ data }) => {
     }
     
     // const c = data.attributes;
-        // const p = data.attributes;
-        // console.log(p);
+        const p = data.attributes;
+        console.log(p);
 
     return (
         <>
@@ -94,17 +92,17 @@ const WishlistItem = ({ data }) => {
                             <span className="text-sm w-8 flex items-center justify-center cursor-pointer border-l border-gray-100" onClick={quantityInc}>+</span>
                         </div>
 
-                        <Button
-                            onClick={() => {
-                                dispatch(
-                                    addToWishlist({
-                                        ...product?.data?.[0],
-                                    })
-                                );
-                                notify()
-                            }}>
-                            <BsCart className="mr-2 h-4 w-4" /> add to cart
-                        </Button>
+                            <Button
+                                onClick={() => {
+                                    dispatch(
+                                        addToWishlist({
+                                            ...product?.data?.[0],
+                                        })
+                                    );
+                                    notify()
+                                }}>
+                                <BsCart className="mr-2 h-4 w-4" /> add to cart
+                            </Button>
                     </div>
                 </div>
             </div>
