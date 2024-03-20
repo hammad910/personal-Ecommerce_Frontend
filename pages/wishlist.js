@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import WishlistItem from "@/components/wishlistItem";
+import WishlistItem from "@/components/WishlistItem";
 import Wrapper from "@/components/Wrapper";
 import { useSelector } from "react-redux";
 
@@ -9,14 +9,15 @@ import { useSelector } from "react-redux";
 
 export const Wishlist = () => {
 
-    const {wishListItems}  = useSelector((state) => state.wishList)
-    console.log(wishListItems);
+    const wishListItems  = useSelector((state) => state.wishList)
+    const p = {wishListItems}.wishListItems.wishlistItems 
+    console.log(p);
 
 
     return (
         <div className="w-full md:py-20">
             <Wrapper>
-                {/* {WishlistItems && WishlistItems.length > 0 && ( */}
+                {p && p.length > 0 && (
                     <>
                         {/* HEADING AND PARAGRAPH START */}
                         <div className="text-center max-w-[800px] mx-auto mt-8 md:mt-0">
@@ -33,7 +34,7 @@ export const Wishlist = () => {
                                 <div className="text-lg font-bold">
                                     Wishlist Items
                                 </div>
-                                {wishListItems.map((item) => (
+                                {p.map((item) => (
                                     <WishlistItem key={item.id} data={item} />
                                 ))}
                             </div>
@@ -41,10 +42,10 @@ export const Wishlist = () => {
                         </div>
                         {/* CART CONTENT END */}
                     </>
-                {/* )} */}
+                )}
 
                 {/* This is empty screen */}
-                {/* {WishlistItems < 1 && ( */}
+                {p < 1 && (
                     <div className="flex-[2] flex flex-col items-center pb-[50px] md:-mt-14">
                         <Image
                             src="/empty-cart.jpg"
@@ -67,7 +68,7 @@ export const Wishlist = () => {
                             Continue Shopping
                         </Link>
                     </div>
-                {/* )} */}
+                )}
             </Wrapper>
         </div>
     );

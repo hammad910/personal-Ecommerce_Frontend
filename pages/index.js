@@ -4,7 +4,7 @@ import Wrapper from "@/components/Wrapper";
 import { useSession } from "next-auth/react";
 import { fetchDataFromApi } from "@/utils/api";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+// import { mongoDBConnect } from "@/db/user.db";
 
 export default function home({ products }) {
     const session = useSession()
@@ -55,3 +55,5 @@ export async function getStaticProps() {
         props: { products },
     };
 }
+
+// mongoDBConnect()

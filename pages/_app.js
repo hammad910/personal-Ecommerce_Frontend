@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import Head from "next/head";
-import { SessionProvider, useSession } from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -9,18 +9,14 @@ import { Provider } from "react-redux";
 import store from "@/store/store";
 import { useRouter } from "next/router";
 
-
-
 export default function App({ Component, pageProps }) {
 
   const router = useRouter()
-  // const session = useSession()
-   // Check if the current page is the login page
-   const isLoginPage = router.pathname === '/login';
-   const isRegisterPage = router.pathname === '/register';
+  const isLoginPage = router.pathname === '/login';
+  const isRegisterPage = router.pathname === '/register';
 
-   // Render the Header and Footer only if it's not the login page
-   const renderHeaderFooter = !isLoginPage && !isRegisterPage;
+  // Render the Header and Footer only if it's not the login page
+  const renderHeaderFooter = !isLoginPage && !isRegisterPage;
 
   return (
     <>
@@ -40,13 +36,13 @@ export default function App({ Component, pageProps }) {
           rel="stylesheet"
         />
       </Head>
-      <SessionProvider session={pageProps.session}>
-        <Provider store={store}>
-        {renderHeaderFooter && <Header />}
-          <Component {...pageProps} />
-          {renderHeaderFooter && <Footer />}
-        </Provider>
-      </SessionProvider>
+        <SessionProvider session={pageProps.session}>
+          <Provider store={store}>
+            {renderHeaderFooter && <Header />}
+            <Component {...pageProps} />
+            {renderHeaderFooter && <Footer />}
+          </Provider>
+        </SessionProvider>
     </>
   );
 }

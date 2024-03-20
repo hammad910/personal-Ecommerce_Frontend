@@ -33,10 +33,10 @@ const WishlistItem = ({ data }) => {
             theme: "dark",
         });
     }
-    
+
     // const c = data.attributes;
-        const p = data.attributes;
-        console.log(p);
+    const p = data.attributes;
+    console.log(p);
 
     return (
         <>
@@ -45,11 +45,11 @@ const WishlistItem = ({ data }) => {
                 {/* IMAGE START */}
                 <div className="shrink-0 aspect-square w-[50px] md:w-[120px]">
                     <Image
-                    src={checkImg}
-                    alt=''
-                    width={120}
-                    height={120}
-                />
+                        src={p.thumbnail.data.attributes.url}
+                        alt=''
+                        width={120}
+                        height={120}
+                    />
                 </div>
                 {/* IMAGE END */}
 
@@ -57,22 +57,19 @@ const WishlistItem = ({ data }) => {
                     <div className="flex flex-col md:flex-row justify-between">
                         {/* PRODUCT TITLE */}
                         <div className="text-lg md:text-2xl font-semibold text-black/[0.8]">
-                            {/* {p.name} */}
-                            air jirdan
+                            {p.name}
                         </div>
 
                         {/* PRODUCT SUBTITLE */}
                         <div className="text-sm md:text-md font-medium text-black/[0.5] block md:hidden">
-                            {/* {p.subtitle} */}
-                            air jordan
+                            {p.subtitle}
                         </div>
 
                         {/* PRODUCT PRICE */}
                         <div className="text-lg md:text-md flex items-center gap-6 font-bold text-black/[0.5] mt-2">
-                            {/* &#8360;{p.price} */}
-                            1999
+                            &#8360;{p.price}
                             <RiDeleteBin6Line
-                                onClick={() => dispatch(removeWishlist  ({ id: data.id }))}
+                                onClick={() => dispatch(removeWishlist({ id: data.id }))}
                                 className="cursor-pointer text-black/[0.5] hover:text-black text-md md:text-lg"
                             />
                         </div>
@@ -81,8 +78,7 @@ const WishlistItem = ({ data }) => {
 
                     {/* PRODUCT SUBTITLE */}
                     <div className="text-md font-medium text-black/[0.5] hidden md:block">
-                        {/* {p.subtitle} */}
-                        air jordan
+                        {p.subtitle}
                     </div>
 
                     <div className="flex items-center justify-between mt-4" >
@@ -92,22 +88,21 @@ const WishlistItem = ({ data }) => {
                             <span className="text-sm w-8 flex items-center justify-center cursor-pointer border-l border-gray-100" onClick={quantityInc}>+</span>
                         </div>
 
-                            <Button
-                                onClick={() => {
-                                    dispatch(
-                                        addToWishlist({
-                                            ...product?.data?.[0],
-                                        })
-                                    );
-                                    notify()
-                                }}>
-                                <BsCart className="mr-2 h-4 w-4" /> add to cart
-                            </Button>
+                        <Button
+                            onClick={() => {
+                                dispatch(
+                                    addToWishlist({
+                                        ...p?.data?.[0],
+                                    })
+                                );
+                                notify()
+                            }}>
+                            <BsCart className="mr-2 h-4 w-4" /> add to cart
+                        </Button>
                     </div>
                 </div>
             </div>
         </>
     );
-};
-
-export default WishlistItem;
+}
+export default WishlistItem

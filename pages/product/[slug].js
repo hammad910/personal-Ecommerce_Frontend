@@ -10,13 +10,15 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { addToWishlist } from "@/store/wishlistSlice";
 import ProductDetailsCarousel from "@/components/ProductDetailscarousel";
+import { useState } from "react";
 
 const ProductDetails = ({ product, products }) => {
     const dispatch = useDispatch()
     const p = product?.data?.[0].attributes;
 
-    const notify = () => {
-        toast.success("Item added to your cart.", {
+
+    const notify = (message) => {
+        toast.success(message, {
             position: "bottom-center",
             autoClose: 5000,
             hideProgressBar: false,
@@ -87,7 +89,8 @@ const ProductDetails = ({ product, products }) => {
                                         oneQuantityPrice: p.price
                                     })
                                 );
-                                notify()
+                                
+                                notify("Item added to your cart!")
                             }}
                         >
                             Add to Cart
@@ -101,7 +104,7 @@ const ProductDetails = ({ product, products }) => {
                                     addToWishlist({
                                         ... product?.data?.[0]
                                     })
-                                );
+                                );notify("Item added to your wishlist!")
                             }}
                             className="w-full py-4 rounded-full border border-black text-lg font-medium transition-transform active:scale-95 flex items-center justify-center gap-2 hover:opacity-75 mb-10">
                             Wishlist

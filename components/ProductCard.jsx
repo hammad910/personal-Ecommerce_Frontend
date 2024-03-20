@@ -17,7 +17,7 @@ const ProductCard = ({ data: { attributes: p, id } }) => {
                 <Image
                     width={500}
                     height={500}
-                    src={p.thumnail.data.attributes.url}
+                    src={p.thumbnail.data.attributes.url}
                     alt=''
                 />
                 <div className="p-4 text-black/[0.9]">

@@ -1,14 +1,30 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { FaFacebook } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
 
 import { signIn } from "next-auth/react";
+
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+
+
 const LoginComponent = () => {
+
+  const session = useSession()
+  const router = useRouter()
+
+
   const handleSignInWithGoogle = async () => {
     await signIn("google");
   };
+
+  useEffect(() => {
+    if (session.data !== null) {
+      router.push('/')
+  }
+  }) 
   return (
     <div className="bg-white min-h-screen flex">
       {/* Sidebar */}

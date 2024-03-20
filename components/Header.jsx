@@ -25,6 +25,8 @@ export default function Home() {
   const [categories, setCategories] = useState(null);
 
   const { cartItems } = useSelector((state) => state.cart);
+  const wishListItems = useSelector((state) => state.wishList)
+  const p = { wishListItems }.wishListItems.wishlistItems
 
   const controlNav = () => {
     if (window.scrollY > 200) {
@@ -75,15 +77,15 @@ export default function Home() {
             categories={categories}
           />
         )}
-        <div className="flex items-center gap-2 text-black">
+        <div className="flex items-center justify-between text-black">
           {/* Icon start */}
           <Link href={'/wishlist'}>
-            <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
+            {p.length >= 1 && <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
               <IoMdHeartEmpty className="text-[19px] md:text-[24px]" />
               <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
-                51
+                {p.length}
               </div>
-            </div>
+            </div>}
           </Link>
           {/* Icon end */}
 
@@ -113,7 +115,11 @@ export default function Home() {
               />
             )}
           </div>
-          <FiLogOut className="text-[20px] cursor-pointer" onClick={signOut} />
+          <Link href={'/login'}>
+            <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
+              <FiLogOut className="text-[19px] md:text-[24px]" />
+            </div>
+          </Link>
         </div>
       </Wrapper>
     </header >
